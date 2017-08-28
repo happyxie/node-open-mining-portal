@@ -256,11 +256,11 @@ module.exports = function(logger){
                 if (!portalConfig.switching[switchName].enabled) return;
 
 
-                var initalPool = proxyState.hasOwnProperty(algorithm) ? proxyState[algorithm] : _this.getFirstPoolForAlgorithm(algorithm);
+                var initialPool = proxyState.hasOwnProperty(algorithm) ? proxyState[algorithm] : _this.getFirstPoolForAlgorithm(algorithm);
                 proxySwitch[switchName] = {
                     algorithm: algorithm,
                     ports: portalConfig.switching[switchName].ports,
-                    currentPool: initalPool,
+                    currentPool: initialPool,
                     servers: []
                 };
 
@@ -277,7 +277,7 @@ module.exports = function(logger){
                         if (pools[currentPool])
                             pools[currentPool].getStratumServer().handleNewClient(socket);
                         else
-                            pools[initalPool].getStratumServer().handleNewClient(socket);
+                            pools[initialPool].getStratumServer().handleNewClient(socket);
 
                     }).listen(parseInt(port), function() {
                         logger.debug(logSystem, logComponent, logSubCat, 'Switching "' + switchName
